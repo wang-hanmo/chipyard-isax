@@ -134,7 +134,7 @@ $(FIRRTL_FILE) $(ANNO_FILE) $(CHISEL_LOG_FILE) &: $(GENERATOR_CLASSPATH) $(EXTRA
 		--top-module $(MODEL_PACKAGE).$(MODEL) \
 		--legacy-configs $(CONFIG_PACKAGE):$(CONFIG) \
 		$(ASPECT_ARGS) \
-		$(EXTRA_CHISEL_OPTIONS)) | tee $(CHISEL_LOG_FILE))
+		$(EXTRA_CHISEL_OPTIONS) --full-stacktrace ) | tee $(CHISEL_LOG_FILE))
 
 define mfc_extra_anno_contents
 [
