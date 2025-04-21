@@ -1,0 +1,12 @@
+*.swp
+*.dump
+target
+*.out
+lib
+*#
+*~
+.nfs*
+.#*
+/.bloop/
+/.metals/
+/out/
