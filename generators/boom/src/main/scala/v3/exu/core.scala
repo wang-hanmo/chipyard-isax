@@ -948,17 +948,17 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
         iss_uops(iss_idx)   := mem_iss_unit.io.iss_uops(mem_iss_cnt)
         mem_iss_unit.io.fu_types(mem_iss_cnt) := Mux(pause_mem, 0.U, fu_types)
         mem_iss_cnt += 1
-      } else if (isax_iss_cnt == 0) {  // new code
-        iss_valids(iss_idx) := isax_iss_unit.io.iss_valids(isax_iss_cnt)
-        iss_uops(iss_idx)   := isax_iss_unit.io.iss_uops(isax_iss_cnt)
-        isax_iss_unit.io.fu_types(isax_iss_cnt) := fu_types
-        isax_iss_cnt += 1
-      } else {
+      } else if (int_iss_cnt < intIssueParam.issueWidth) {
         iss_valids(iss_idx) := int_iss_unit.io.iss_valids(int_iss_cnt)
         iss_uops(iss_idx)   := int_iss_unit.io.iss_uops(int_iss_cnt)
         int_iss_unit.io.fu_types(int_iss_cnt) := fu_types
         int_iss_cnt += 1
-      }
+      } else {  // new code
+        iss_valids(iss_idx) := isax_iss_unit.io.iss_valids(isax_iss_cnt)
+        iss_uops(iss_idx)   := isax_iss_unit.io.iss_uops(isax_iss_cnt)
+        isax_iss_unit.io.fu_types(isax_iss_cnt) := fu_types
+        isax_iss_cnt += 1
+      } 
       iss_idx += 1
     }
   }
