@@ -180,6 +180,10 @@ class WithRoccExample extends Config((site, here, up) => {
     })
 })
 
+class WithISAX extends Config((site, here, up) => {
+  case BuildRoCC => Seq((p: Parameters) => LazyModule(
+    new BlackBoxExample(OpcodeSet.custom0 | OpcodeSet.custom1, "ISAXBlackBox")(p)))
+})
 /**
  * WARNING!!! IGNORE AT YOUR OWN PERIL!!!
  *

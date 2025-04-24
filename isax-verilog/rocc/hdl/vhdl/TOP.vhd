@@ -28,7 +28,7 @@ end;
 architecture behav of TOP is 
     attribute CORE_GENERATION_INFO : STRING;
     attribute CORE_GENERATION_INFO of behav : architecture is
-    "TOP_TOP,hls_ip_2023_2,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xczu9eg-ffvb1156-2-e,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=3.085000,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=4,HLS_SYN_LUT=156,HLS_VERSION=2023_2}";
+    "TOP_TOP,hls_ip_2023_2,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xczu9eg-ffvb1156-2-e,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=3.085000,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=4,HLS_SYN_LUT=188,HLS_VERSION=2023_2}";
     constant ap_const_logic_1 : STD_LOGIC := '1';
     constant ap_const_logic_0 : STD_LOGIC := '0';
     constant ap_ST_fsm_pp0_stage0 : STD_LOGIC_VECTOR (0 downto 0) := "1";
@@ -40,6 +40,9 @@ architecture behav of TOP is
     constant ap_const_lv32_7F : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000001111111";
     constant ap_const_lv32_80 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000010000000";
     constant ap_const_lv32_BF : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000010111111";
+    constant ap_const_lv32_7 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000111";
+    constant ap_const_lv32_B : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000001011";
+    constant ap_const_lv59_0 : STD_LOGIC_VECTOR (58 downto 0) := "00000000000000000000000000000000000000000000000000000000000";
     constant ap_const_lv64_0 : STD_LOGIC_VECTOR (63 downto 0) := "0000000000000000000000000000000000000000000000000000000000000000";
 
     signal ap_rst_n_inv : STD_LOGIC;
@@ -57,7 +60,7 @@ architecture behav of TOP is
     signal ap_loop_exit_ready : STD_LOGIC;
     signal ap_loop_exit_ready_pp0_iter1_reg : STD_LOGIC;
     signal ap_block_pp0_stage0_subdone : BOOLEAN;
-    signal icmp_ln42_fu_108_p2 : STD_LOGIC_VECTOR (0 downto 0);
+    signal icmp_ln47_fu_128_p2 : STD_LOGIC_VECTOR (0 downto 0);
     signal ap_condition_exit_pp0_iter0_stage0 : STD_LOGIC;
     signal ap_ready_int : STD_LOGIC;
     signal IN_r_TDATA_blk_n : STD_LOGIC;
@@ -65,10 +68,11 @@ architecture behav of TOP is
     signal OUT_r_TDATA_blk_n : STD_LOGIC;
     signal ap_block_pp0_stage0_11001 : BOOLEAN;
     signal ap_block_pp0_stage0_01001 : BOOLEAN;
-    signal in_rs2_fu_83_p4 : STD_LOGIC_VECTOR (63 downto 0);
-    signal in_rs1_fu_73_p4 : STD_LOGIC_VECTOR (63 downto 0);
-    signal out_data_fu_93_p2 : STD_LOGIC_VECTOR (63 downto 0);
-    signal in_inst_fu_69_p1 : STD_LOGIC_VECTOR (31 downto 0);
+    signal in_rs2_fu_91_p4 : STD_LOGIC_VECTOR (63 downto 0);
+    signal in_rs1_fu_81_p4 : STD_LOGIC_VECTOR (63 downto 0);
+    signal out_data_fu_111_p2 : STD_LOGIC_VECTOR (63 downto 0);
+    signal tmp_fu_101_p4 : STD_LOGIC_VECTOR (4 downto 0);
+    signal in_inst_fu_77_p1 : STD_LOGIC_VECTOR (63 downto 0);
     signal ap_done_reg : STD_LOGIC := '0';
     signal ap_continue_int : STD_LOGIC;
     signal ap_done_int : STD_LOGIC;
@@ -266,7 +270,7 @@ begin
         end if; 
     end process;
 
-    OUT_r_TDATA_int_regslice <= (out_data_fu_93_p2 & ap_const_lv64_0);
+    OUT_r_TDATA_int_regslice <= ((out_data_fu_111_p2 & ap_const_lv59_0) & tmp_fu_101_p4);
     OUT_r_TVALID <= regslice_both_OUT_r_V_data_V_U_vld_out;
 
     OUT_r_TVALID_int_regslice_assign_proc : process(ap_CS_fsm_pp0_stage0, ap_block_pp0_stage0_11001, ap_start_int)
@@ -311,9 +315,9 @@ begin
     end process;
 
 
-    ap_condition_exit_pp0_iter0_stage0_assign_proc : process(ap_CS_fsm_pp0_stage0, ap_block_pp0_stage0_subdone, icmp_ln42_fu_108_p2, ap_start_int)
+    ap_condition_exit_pp0_iter0_stage0_assign_proc : process(ap_CS_fsm_pp0_stage0, ap_block_pp0_stage0_subdone, icmp_ln47_fu_128_p2, ap_start_int)
     begin
-        if (((icmp_ln42_fu_108_p2 = ap_const_lv1_1) and (ap_const_boolean_0 = ap_block_pp0_stage0_subdone) and (ap_start_int = ap_const_logic_1) and (ap_const_logic_1 = ap_CS_fsm_pp0_stage0))) then 
+        if (((icmp_ln47_fu_128_p2 = ap_const_lv1_1) and (ap_const_boolean_0 = ap_block_pp0_stage0_subdone) and (ap_start_int = ap_const_logic_1) and (ap_const_logic_1 = ap_CS_fsm_pp0_stage0))) then 
             ap_condition_exit_pp0_iter0_stage0 <= ap_const_logic_1;
         else 
             ap_condition_exit_pp0_iter0_stage0 <= ap_const_logic_0;
@@ -369,9 +373,10 @@ begin
                 ap_rst_n_inv <= not(ap_rst_n);
     end process;
 
-    icmp_ln42_fu_108_p2 <= "1" when (in_inst_fu_69_p1 = ap_const_lv32_0) else "0";
-    in_inst_fu_69_p1 <= IN_r_TDATA_int_regslice(32 - 1 downto 0);
-    in_rs1_fu_73_p4 <= IN_r_TDATA_int_regslice(127 downto 64);
-    in_rs2_fu_83_p4 <= IN_r_TDATA_int_regslice(191 downto 128);
-    out_data_fu_93_p2 <= std_logic_vector(unsigned(in_rs2_fu_83_p4) + unsigned(in_rs1_fu_73_p4));
+    icmp_ln47_fu_128_p2 <= "1" when (in_inst_fu_77_p1 = ap_const_lv64_0) else "0";
+    in_inst_fu_77_p1 <= IN_r_TDATA_int_regslice(64 - 1 downto 0);
+    in_rs1_fu_81_p4 <= IN_r_TDATA_int_regslice(127 downto 64);
+    in_rs2_fu_91_p4 <= IN_r_TDATA_int_regslice(191 downto 128);
+    out_data_fu_111_p2 <= std_logic_vector(unsigned(in_rs2_fu_91_p4) + unsigned(in_rs1_fu_81_p4));
+    tmp_fu_101_p4 <= IN_r_TDATA_int_regslice(11 downto 7);
 end behav;

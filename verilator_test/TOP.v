@@ -6,7 +6,7 @@
 
 `timescale 1 ns / 1 ps 
 
-(* CORE_GENERATION_INFO="TOP_TOP,hls_ip_2023_2,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xczu9eg-ffvb1156-2-e,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=3.085000,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=4,HLS_SYN_LUT=188,HLS_VERSION=2023_2}" *)
+(* CORE_GENERATION_INFO="TOP_TOP,hls_ip_2023_2,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xczu9eg-ffvb1156-2-e,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=3.085000,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=4,HLS_SYN_LUT=156,HLS_VERSION=2023_2}" *)
 
 module TOP (
         ap_clk,
@@ -52,7 +52,7 @@ reg    ap_block_state2_pp0_stage0_iter1;
 wire    ap_loop_exit_ready;
 reg    ap_loop_exit_ready_pp0_iter1_reg;
 reg    ap_block_pp0_stage0_subdone;
-wire   [0:0] icmp_ln47_fu_128_p2;
+wire   [0:0] icmp_ln42_fu_108_p2;
 reg    ap_condition_exit_pp0_iter0_stage0;
 reg    ap_ready_int;
 reg    IN_r_TDATA_blk_n;
@@ -60,11 +60,10 @@ wire    ap_block_pp0_stage0;
 reg    OUT_r_TDATA_blk_n;
 reg    ap_block_pp0_stage0_11001;
 reg    ap_block_pp0_stage0_01001;
-wire   [63:0] in_rs2_fu_91_p4;
-wire   [63:0] in_rs1_fu_81_p4;
-wire   [63:0] out_data_fu_111_p2;
-wire   [4:0] tmp_fu_101_p4;
-wire   [63:0] in_inst_fu_77_p1;
+wire   [63:0] in_rs2_fu_83_p4;
+wire   [63:0] in_rs1_fu_73_p4;
+wire   [63:0] out_data_fu_93_p2;
+wire   [31:0] in_inst_fu_69_p1;
 reg    ap_done_reg;
 wire    ap_continue_int;
 reg    ap_done_int;
@@ -207,7 +206,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((icmp_ln47_fu_128_p2 == 1'd1) & (1'b0 == ap_block_pp0_stage0_subdone) & (ap_start_int == 1'b1) & (1'b1 == ap_CS_fsm_pp0_stage0))) begin
+    if (((icmp_ln42_fu_108_p2 == 1'd1) & (1'b0 == ap_block_pp0_stage0_subdone) & (ap_start_int == 1'b1) & (1'b1 == ap_CS_fsm_pp0_stage0))) begin
         ap_condition_exit_pp0_iter0_stage0 = 1'b1;
     end else begin
         ap_condition_exit_pp0_iter0_stage0 = 1'b0;
@@ -259,7 +258,7 @@ end
 
 assign IN_r_TREADY = regslice_both_IN_r_V_data_V_U_ack_in;
 
-assign OUT_r_TDATA_int_regslice = {{{out_data_fu_111_p2}, {59'd0}}, {tmp_fu_101_p4}};
+assign OUT_r_TDATA_int_regslice = {{out_data_fu_93_p2}, {64'd0}};
 
 assign OUT_r_TVALID = regslice_both_OUT_r_V_data_V_U_vld_out;
 
@@ -297,23 +296,22 @@ always @ (*) begin
     ap_rst_n_inv = ~ap_rst_n;
 end
 
-assign icmp_ln47_fu_128_p2 = ((in_inst_fu_77_p1 == 64'd0) ? 1'b1 : 1'b0);
+assign icmp_ln42_fu_108_p2 = ((in_inst_fu_69_p1 == 32'd0) ? 1'b1 : 1'b0);
 
-assign in_inst_fu_77_p1 = IN_r_TDATA_int_regslice[63:0];
+assign in_inst_fu_69_p1 = IN_r_TDATA_int_regslice[31:0];
 
-assign in_rs1_fu_81_p4 = {{IN_r_TDATA_int_regslice[127:64]}};
+assign in_rs1_fu_73_p4 = {{IN_r_TDATA_int_regslice[127:64]}};
 
-assign in_rs2_fu_91_p4 = {{IN_r_TDATA_int_regslice[191:128]}};
+assign in_rs2_fu_83_p4 = {{IN_r_TDATA_int_regslice[191:128]}};
 
-assign out_data_fu_111_p2 = (in_rs2_fu_91_p4 + in_rs1_fu_81_p4);
-
-assign tmp_fu_101_p4 = {{IN_r_TDATA_int_regslice[11:7]}};
+assign out_data_fu_93_p2 = (in_rs2_fu_83_p4 + in_rs1_fu_73_p4);
 
 
 reg find_kernel_block = 0;
 // synthesis translate_off
 `include "TOP_hls_deadlock_kernel_monitor_top.vh"
 // synthesis translate_on
+
 
 endmodule //TOP
 
