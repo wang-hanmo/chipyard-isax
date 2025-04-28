@@ -109,13 +109,6 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
   mem_iss_unit.suggestName("mem_issue_unit")
   val int_iss_unit     = Module(new IssueUnitCollapsing(intIssueParam, numIntIssueWakeupPorts))
   int_iss_unit.suggestName("int_issue_unit")
-  // new code
-  val isax_iss_unit    = Module(new IssueUnitISAX(isaxIssueParam.numEntries,
-                                                  isaxIssueParam.issueWidth,
-                                                  numIntIssueWakeupPorts,
-                                                  isaxIssueParam.iqType,
-                                                  isaxIssueParam.dispatchWidth))
-  isax_iss_unit.suggestName("isax_issue_unit")
 
   val issue_units      = Seq(mem_iss_unit, int_iss_unit)
   val dispatcher       = Module(new BasicDispatcher)
@@ -140,7 +133,7 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
                                                                    (if (usingFPU) 1 else 0) +
                                                                    (if (usingRoCC) 1 else 0)))
   val iregister_read   = Module(new RegisterRead(
-                           issue_units.map(_.issueWidth).sum + isax_iss_unit.issueWidth,  // new code
+                           issue_units.map(_.issueWidth).sum,
                            exe_units.withFilter(_.readsIrf).map(_.supportedFuncUnits).toSeq,
                            numIrfReadPorts,
                            exe_units.withFilter(_.readsIrf).map(x => 2).toSeq,
@@ -155,8 +148,7 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
   val int_ren_wakeups  = Wire(Vec(numIntRenameWakeupPorts, Valid(new ExeUnitResp(xLen))))
   val pred_wakeup  = Wire(Valid(new ExeUnitResp(1)))
 
-  // new code
-  require (exe_units.length == issue_units.map(_.issueWidth).sum + isax_iss_unit.issueWidth)
+  require (exe_units.length == issue_units.map(_.issueWidth).sum)
 
   //***********************************
   // Pipeline State Registers and Wires
@@ -783,8 +775,6 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
   for (i <- 0 until issueParams.size) {
     if (issueParams(i).iqType == IQT_FP.litValue) {
        fp_pipeline.io.dis_uops <> dispatcher.io.dis_uops(i)
-    } else if (issueParams(i).iqType == IQT_ISAX.litValue) { // new code
-       isax_iss_unit.io.dis_uops <> dispatcher.io.dis_uops(i)
     } else {
        issue_units(iu_idx).io.dis_uops <> dispatcher.io.dis_uops(i)
        iu_idx += 1
@@ -797,8 +787,7 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
   //-------------------------------------------------------------
   //-------------------------------------------------------------
 
-  // new code
-  require (issue_units.map(_.issueWidth).sum + isax_iss_unit.issueWidth == exe_units.length)
+  require (issue_units.map(_.issueWidth).sum == exe_units.length)
 
   var iss_wu_idx = 1
   var ren_wu_idx = 1
@@ -883,8 +872,6 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
   issue_units map { iu =>
      iu.io.spec_ld_wakeup := io.lsu.spec_ld_wakeup
   }
-  // new code
-  isax_iss_unit.io.spec_ld_wakeup := io.lsu.spec_ld_wakeup
 
 
   // Connect the predicate wakeup port
@@ -896,9 +883,6 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
     int_iss_unit.io.pred_wakeup_port.valid := pred_wakeup.valid
     int_iss_unit.io.pred_wakeup_port.bits := pred_wakeup.bits.uop.pdst
   }
-  // new code
-  isax_iss_unit.io.pred_wakeup_port.valid := false.B
-  isax_iss_unit.io.pred_wakeup_port.bits := DontCare
 
 
   // ----------------------------------------------------------------
@@ -930,8 +914,6 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
   var iss_idx = 0
   var int_iss_cnt = 0
   var mem_iss_cnt = 0
-  // new code
-  var isax_iss_cnt = 0
   for (w <- 0 until exe_units.length) {
     var fu_types = exe_units(w).io.fu_types
     val exe_unit = exe_units(w)
@@ -948,17 +930,12 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
         iss_uops(iss_idx)   := mem_iss_unit.io.iss_uops(mem_iss_cnt)
         mem_iss_unit.io.fu_types(mem_iss_cnt) := Mux(pause_mem, 0.U, fu_types)
         mem_iss_cnt += 1
-      } else if (int_iss_cnt < intIssueParam.issueWidth) {
+      } else {
         iss_valids(iss_idx) := int_iss_unit.io.iss_valids(int_iss_cnt)
         iss_uops(iss_idx)   := int_iss_unit.io.iss_uops(int_iss_cnt)
         int_iss_unit.io.fu_types(int_iss_cnt) := fu_types
         int_iss_cnt += 1
-      } else {  // new code
-        iss_valids(iss_idx) := isax_iss_unit.io.iss_valids(isax_iss_cnt)
-        iss_uops(iss_idx)   := isax_iss_unit.io.iss_uops(isax_iss_cnt)
-        isax_iss_unit.io.fu_types(isax_iss_cnt) := fu_types
-        isax_iss_cnt += 1
-      } 
+      }
       iss_idx += 1
     }
   }
@@ -967,16 +944,10 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
   issue_units.map(_.io.tsc_reg := debug_tsc_reg)
   issue_units.map(_.io.brupdate := brupdate)
   issue_units.map(_.io.flush_pipeline := RegNext(rob.io.flush.valid))
-  // new code
-  isax_iss_unit.io.tsc_reg := debug_tsc_reg
-  isax_iss_unit.io.brupdate := brupdate
-  isax_iss_unit.io.flush_pipeline := RegNext(rob.io.flush.valid)
 
   // Load-hit Misspeculations
   require (mem_iss_unit.issueWidth <= 2)
   issue_units.map(_.io.ld_miss := io.lsu.ld_miss)
-  // new code
-  isax_iss_unit.io.ld_miss := io.lsu.ld_miss
 
   mem_units.map(u => u.io.com_exception := RegNext(rob.io.flush.valid))
 
@@ -991,17 +962,6 @@ class BoomCore()(implicit p: Parameters) extends BoomModule
 
     require (iu.io.wakeup_ports.length == int_iss_wakeups.length)
   }
-  // new code
-  for {
-    (issport, wakeup) <- isax_iss_unit.io.wakeup_ports zip int_iss_wakeups
-  }{
-    issport.valid := wakeup.valid
-    issport.bits.pdst := wakeup.bits.uop.pdst
-    issport.bits.poisoned := wakeup.bits.uop.iw_p1_poisoned || wakeup.bits.uop.iw_p2_poisoned
-
-    require (isax_iss_unit.io.wakeup_ports.length == int_iss_wakeups.length)
-  }
-
 
   //-------------------------------------------------------------
   //-------------------------------------------------------------

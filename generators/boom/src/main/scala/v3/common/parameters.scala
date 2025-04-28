@@ -31,8 +31,7 @@ case class BoomCoreParams(
   issueParams: Seq[IssueParams] = Seq(
     IssueParams(issueWidth=1, numEntries=16, iqType=IQT_MEM.litValue, dispatchWidth=1),
     IssueParams(issueWidth=2, numEntries=16, iqType=IQT_INT.litValue, dispatchWidth=1),
-    IssueParams(issueWidth=1, numEntries=16, iqType=IQT_FP.litValue , dispatchWidth=1),
-    IssueParams(issueWidth=1, numEntries=16, iqType=IQT_ISAX.litValue, dispatchWidth=1)),
+    IssueParams(issueWidth=1, numEntries=16, iqType=IQT_FP.litValue , dispatchWidth=1)),
   numLdqEntries: Int = 16,
   numStqEntries: Int = 16,
   numIntPhysRegisters: Int = 96,
@@ -74,9 +73,6 @@ case class BoomCoreParams(
   bootFreqHz: BigInt = 0,
   fpu: Option[FPUParams] = Some(FPUParams(sfmaLatency=4, dfmaLatency=4)),
   usingFPU: Boolean = true,
-  // new code
-  usingISAX: Boolean = true,
-
   haveBasicCounters: Boolean = true,
   misaWritable: Boolean = false,
   mtvecInit: Option[BigInt] = Some(BigInt(0)),
@@ -222,15 +218,12 @@ trait HasBoomCoreParameters extends freechips.rocketchip.tile.HasCoreParameters
   require (issueParams.count(_.iqType == IQT_FP.litValue) == 1 || !usingFPU)
   require (issueParams.count(_.iqType == IQT_MEM.litValue) == 1)
   require (issueParams.count(_.iqType == IQT_INT.litValue) == 1)
-  require (issueParams.count(_.iqType == IQT_ISAX.litValue) == 1)
 
   val intIssueParam = issueParams.find(_.iqType == IQT_INT.litValue).get
   val memIssueParam = issueParams.find(_.iqType == IQT_MEM.litValue).get
-  val isaxIssueParam = issueParams.find(_.iqType == IQT_ISAX.litValue).get
 
   val intWidth = intIssueParam.issueWidth
   val memWidth = memIssueParam.issueWidth
-  val isaxWidth = isaxIssueParam.issueWidth
 
   issueParams.map(x => require(x.dispatchWidth <= coreWidth && x.dispatchWidth > 0))
 
@@ -288,14 +281,6 @@ trait HasBoomCoreParameters extends freechips.rocketchip.tile.HasCoreParameters
   val stqAddrSz       = log2Ceil(numStqEntries)
   val lsuAddrSz       = ldqAddrSz max stqAddrSz
   val brTagSz         = log2Ceil(maxBrCount)
-
-  // new code
-  val inputRegisterCount  = 16
-  val outputRegisterCount = 8
-  val slotCount           = 16
-  val inRegSz     = log2Ceil(inputRegisterCount)
-  val outRegSz    = log2Ceil(outputRegisterCount)
-  val slotSz      = log2Ceil(slotCount)
 
   require (numIntPhysRegs >= (32 + coreWidth))
   require (numFpPhysRegs >= (32 + coreWidth))

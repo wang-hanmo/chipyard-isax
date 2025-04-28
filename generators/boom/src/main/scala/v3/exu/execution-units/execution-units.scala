@@ -102,9 +102,7 @@ class ExecutionUnits(val fpu: Boolean)(implicit val p: Parameters) extends HasBo
   }
 
   if (!fpu) {
-    // new code
     val int_width = issueParams.find(_.iqType == IQT_INT.litValue).get.issueWidth
-    val isax_width = issueParams.find(_.iqType == IQT_ISAX.litValue).get.issueWidth
 
     for (w <- 0 until memWidth) {
       val memExeUnit = Module(new ALUExeUnit(
@@ -127,19 +125,6 @@ class ExecutionUnits(val fpu: Boolean)(implicit val p: Parameters) extends HasBo
         hasIfpu        = is_nth(4) && usingFPU))
       exe_units += alu_exe_unit
     }
-    
-    // new code
-    for (w <- 0 until isax_width) {
-      val isax_exe_unit = Module(new ALUExeUnit(
-        hasJmpUnit     = false,
-        hasCSR         = false,
-        hasRocc        = false,
-        hasMul         = false,
-        hasDiv         = false,
-        hasIfpu        = false))
-      exe_units += isax_exe_unit
-    }
-
   } else {
     val fp_width = issueParams.find(_.iqType == IQT_FP.litValue).get.issueWidth
     for (w <- 0 until fp_width) {

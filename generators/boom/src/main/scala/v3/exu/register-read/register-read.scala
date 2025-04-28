@@ -75,8 +75,7 @@ class RegisterRead(
 
   //-------------------------------------------------------------
   // hook up inputs
-  
-  println(s"IssueWidth = $issueWidth")
+
   for (w <- 0 until issueWidth) {
     val rrd_decode_unit = Module(new RegisterReadDecode(supportedUnitsArray(w)))
     rrd_decode_unit.io.iss_valid := io.iss_valids(w)

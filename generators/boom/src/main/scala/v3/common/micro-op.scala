@@ -141,14 +141,6 @@ class MicroOp(implicit p: Parameters) extends BoomBundle
   // What prediction structure provides the prediction TO this op
   val debug_tsrc       = UInt(BSRC_SZ.W)
 
-  // new code
-  val inIdx             = UInt(inRegSz.W)
-  val outIdx            = UInt(outRegSz.W)
-  val slotIdx           = UInt(slotSz.W)
-  val isEXEC            = Bool()            // pure EXEC, not FILL+EXEC+PICK fused operation
-  val isFILL            = Bool()
-  val isPICK            = Bool()
-
   // Do we allocate a branch tag for this?
   // SFB branches don't get a mask, they get a predicate bit
   def allocate_brtag   = (is_br && !is_sfb) || is_jalr

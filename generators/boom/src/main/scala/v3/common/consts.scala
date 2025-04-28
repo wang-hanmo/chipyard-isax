@@ -23,14 +23,12 @@ import freechips.rocketchip.rocket.RVCExpander
  */
 trait IQType
 {
-  val IQT_SZ  = 4
+  val IQT_SZ  = 3
   val IQT_INT = 1.U(IQT_SZ.W)
   val IQT_MEM = 2.U(IQT_SZ.W)
   val IQT_FP  = 4.U(IQT_SZ.W)
 
   val IQT_MFP = 6.U(IQT_SZ.W)
-  // new code
-  val IQT_ISAX = 8.U(IQT_SZ.W)
 }
 
 
@@ -260,12 +258,6 @@ trait ScalarOpConstants
 
   val uopMOV       = 109.U(UOPC_SZ.W) // conditional mov decoded from "add rd, x0, rs2"
 
-  // new code
-  val uopEXEC      = 110.U(UOPC_SZ.W) // ISAX instruction: EXEC     (fill + exec + pick)
-  val uopPICKFILL  = 111.U(UOPC_SZ.W) // ISAX instruction: PICKFILL (pick + fill)
-  val uopPICK      = 112.U(UOPC_SZ.W) // ISAX instruction: PICK     (pick)
-  val uopFILL      = 113.U(UOPC_SZ.W) // ISAX instruction: FILL     (fill)
-
   // The Bubble Instruction (Machine generated NOP)
   // Insert (XOR x0,x0,x0) which is different from software compiler
   // generated NOPs which are (ADDI x0, x0, 0).
@@ -311,13 +303,6 @@ trait RISCVConstants
   val RS2_LSB = 20
   val RS3_MSB = 31
   val RS3_LSB = 27
-  // new code
-  val IN_MSB  = 31
-  val IN_LSB  = 29
-  val OUT_MSB = 14
-  val OUT_LSB = 12
-  val SLT_MSB = 28
-  val SLT_LSB = 25
 
   val CSR_ADDR_MSB = 31
   val CSR_ADDR_LSB = 20

@@ -116,6 +116,7 @@ class SV48RocketConfig extends Config(
   new freechips.rocketchip.rocket.WithNHugeCores(1) ++
   new chipyard.config.AbstractConfig)
 
+// new code
 class RocketISAXConfig extends Config(
   new freechips.rocketchip.subsystem.WithISAX ++
   new RocketConfig)
