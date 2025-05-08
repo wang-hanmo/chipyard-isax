@@ -84,11 +84,11 @@ wire    regslice_both_OUT_r_V_data_V_U_vld_out;
 wire    ap_ce_reg;
 
 // power-on initialization
-// initial begin
-// #0 ap_CS_fsm = 1'd1;
-// #0 ap_enable_reg_pp0_iter1 = 1'b0;
-// #0 ap_done_reg = 1'b0;
-// end
+initial begin
+ap_CS_fsm = 1'd1;
+ap_enable_reg_pp0_iter1 = 1'b0;
+ap_done_reg = 1'b0;
+end
 
 TOP_flow_control_loop_pipe flow_control_loop_pipe_U(
     .ap_clk(ap_clk),

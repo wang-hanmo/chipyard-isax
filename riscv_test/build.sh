@@ -2,7 +2,15 @@
 riscv_toolchain=""
 
 extra_path=/opt/riscv/bin
-compile_cmd="riscv64-unknown-elf-gcc -I./env -I./common  -DPREALLOCATE=1 -mcmodel=medany -std=gnu99 -O2 -ffast-math -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns -o $1.riscv ./$1.c ./common/syscalls.c ./common/crt.S -static -nostdlib -nostartfiles -lm -lgcc -T ./common/test.ld"
+compile_cmd="riscv64-unknown-elf-gcc \
+            -I./env -I./common \
+            -DPREALLOCATE=1 \
+            -mcmodel=medany -Wl,--relax \
+            -std=gnu99 -O2 \
+            -ffast-math -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns \
+            -o $1.riscv \
+            ./$1.o ./common/syscalls.c ./common/crt.S ./mylib.c\
+            -static -nostdlib -nostartfiles -lm -lgcc -T ./common/test.ld"
 dump_cmd="riscv64-unknown-linux-gnu-objdump --disassemble-all --disassemble-zeroes --section=.text --section=.text.startup --section=.text.init --section=.data $1.riscv"
 exec_cmd="${compile_cmd} && ${dump_cmd}"
 

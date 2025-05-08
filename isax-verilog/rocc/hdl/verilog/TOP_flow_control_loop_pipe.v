@@ -48,9 +48,9 @@ input   ap_loop_exit_ready;
 input   ap_loop_exit_done;
 
 // power-on initialization
-// initial begin
-// #0 ap_loop_init = 1'b1;
-// end
+initial begin
+ap_loop_init = 1'b1;
+end
 
 assign ap_start_int = ap_start;
 
