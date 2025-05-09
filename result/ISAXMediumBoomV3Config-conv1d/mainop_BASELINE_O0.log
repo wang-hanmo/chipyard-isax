@@ -1,0 +1,7 @@
+[UART] UART0 is here (stdin/stdout).
+[4091565000] %Error: TestHarness.sv:99: Assertion failed in TOP.TestDriver.testHarness: Assertion failed: *** FAILED *** (exit code =    1085219)
+
+    at SimTSI.scala:21 assert(!error, "*** FAILED *** (exit code = %%d)\n", exit >> 1.U)
+
+%Error: /mnt/disk/newhome_20241022/wanghanmo/chipyard-isax/sims/verilator/generated-src/chipyard.harness.TestHarness.ISAXMediumBoomV3Config.conv1d_new/gen-collateral/TestHarness.sv:99: Verilog $stop
+Aborting...
