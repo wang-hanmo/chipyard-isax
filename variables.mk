@@ -142,7 +142,7 @@ CHIPYARD_RSRCS_DIR   = $(base_dir)/generators/chipyard/src/main/resources
 #########################################################################################
 # names of various files needed to compile and run things
 #########################################################################################
-long_name = $(MODEL_PACKAGE).$(MODEL).$(CONFIG)
+long_name = $(MODEL_PACKAGE).$(MODEL).$(CONFIG).$(MODULE)
 
 # classpaths
 CLASSPATH_CACHE ?= $(base_dir)/.classpath_cache
@@ -288,7 +288,7 @@ GEN_COLLATERAL_DIR ?=$(build_dir)/gen-collateral
 #########################################################################################
 # simulation variables
 #########################################################################################
-TIMEOUT_CYCLES = 10000000
+TIMEOUT_CYCLES = 18446744073709551615
 
 # legacy timeout_cycles handling
 timeout_cycles ?=

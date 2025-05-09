@@ -206,3 +206,87 @@ double strtod(const char *str, char **endptr) {
 double atof(const char *str) {
     return strtod(str, NULL);  // 直接调用 strtod 忽略 endptr
 }
+
+long long strtoll(const char *nptr, char **endptr, int base) {
+    const char *s = nptr;
+    long long acc = 0;
+    int c;
+    int neg = 0;
+
+    // Skip whitespace
+    while (*s == ' ' || *s == '\t' || *s == '\n' ||
+           *s == '\v' || *s == '\f' || *s == '\r')
+        s++;
+
+    // Handle optional sign
+    if (*s == '-') {
+        neg = 1;
+        s++;
+    } else if (*s == '+') {
+        s++;
+    }
+
+    // Auto-detect base if needed
+    if ((base == 0 || base == 16) &&
+        s[0] == '0' && (s[1] == 'x' || s[1] == 'X')) {
+        base = 16;
+        s += 2;
+    } else if (base == 0 && s[0] == '0') {
+        base = 8;
+        s++;
+    } else if (base == 0) {
+        base = 10;
+    }
+
+    // Convert characters
+    while (1) {
+        c = *s;
+        int digit;
+        if (c >= '0' && c <= '9')
+            digit = c - '0';
+        else if (c >= 'a' && c <= 'z')
+            digit = c - 'a' + 10;
+        else if (c >= 'A' && c <= 'Z')
+            digit = c - 'A' + 10;
+        else
+            break;
+
+        if (digit >= base)
+            break;
+
+        acc = acc * base + digit;
+        s++;
+    }
+
+    if (endptr)
+        *endptr = (char *)s;
+
+    return neg ? -acc : acc;
+}
+
+long long atoll(const char *nptr) {
+    long long acc = 0;
+    int neg = 0;
+
+    // 跳过空白符
+    while (*nptr == ' ' || *nptr == '\t' || *nptr == '\n' ||
+           *nptr == '\v' || *nptr == '\f' || *nptr == '\r') {
+        nptr++;
+    }
+
+    // 检查正负号
+    if (*nptr == '-') {
+        neg = 1;
+        nptr++;
+    } else if (*nptr == '+') {
+        nptr++;
+    }
+
+    // 数字转换
+    while (*nptr >= '0' && *nptr <= '9') {
+        acc = acc * 10 + (*nptr - '0');
+        nptr++;
+    }
+
+    return neg ? -acc : acc;
+}
