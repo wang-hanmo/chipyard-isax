@@ -25,8 +25,8 @@ sim_name = verilator
 # verilator simulator types and rules
 #########################################################################################
 sim_prefix = simulator
-sim = $(sim_dir)/$(sim_prefix)-$(MODEL_PACKAGE)-$(CONFIG)
-sim_debug = $(sim_dir)/$(sim_prefix)-$(MODEL_PACKAGE)-$(CONFIG)-debug
+sim = $(sim_dir)/$(sim_prefix)-$(MODEL_PACKAGE)-$(CONFIG)-$(MODULE)
+sim_debug = $(sim_dir)/$(sim_prefix)-$(MODEL_PACKAGE)-$(CONFIG)-$(MODULE)-debug
 
 include $(base_dir)/sims/common-sim-flags.mk
 
