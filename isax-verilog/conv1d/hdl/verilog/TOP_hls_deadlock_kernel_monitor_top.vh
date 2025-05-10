@@ -6,16 +6,17 @@ assign kernel_monitor_reset = ~ap_rst_n;
 assign kernel_monitor_clock = ap_clk;
 assign kernel_monitor_report = 1'b0;
 wire [1:0] axis_block_sigs;
-wire [0:0] inst_idle_sigs;
+wire [1:0] inst_idle_sigs;
 wire [0:0] inst_block_sigs;
 wire kernel_block;
 
-assign axis_block_sigs[0] = ~IN_r_TDATA_blk_n;
-assign axis_block_sigs[1] = ~OUT_r_TDATA_blk_n;
+assign axis_block_sigs[0] = ~grp_TOP_Pipeline_VITIS_LOOP_38_1_fu_384.IN_r_TDATA_blk_n;
+assign axis_block_sigs[1] = ~grp_TOP_Pipeline_VITIS_LOOP_38_1_fu_384.OUT_r_TDATA_blk_n;
 
 assign inst_block_sigs[0] = 1'b0;
 
 assign inst_idle_sigs[0] = 1'b0;
+assign inst_idle_sigs[1] = grp_TOP_Pipeline_VITIS_LOOP_38_1_fu_384.ap_idle;
 
 TOP_hls_deadlock_idx0_monitor TOP_hls_deadlock_idx0_monitor_U (
     .clock(kernel_monitor_clock),

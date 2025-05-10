@@ -534,10 +534,10 @@ class RoCCDecode(implicit val p: Parameters) extends DecodeConstants
                         //   | | | | | | | |   |       |       |      |      |       | |           | | | | | div       | fence
                         //   | | | | | | | |   |       |       |      |      |       | |           | | | | | | wxd     | | amo
                         //   | | | | | | | |   |       |       |      |      |       | |           | | | | | | |       | | | dp    
-    CUSTOM0_ALL->       List(Y,N,Y,N,N,N,Y,Y,A2_ZERO,A1_RS1, IMM_X, DW_XPR,FN_ADD,   N,M_X,N,N,N,N,N,N,Y,CSR.N,N,N,N,N),
-    CUSTOM1_ALL->       List(Y,N,Y,N,N,N,Y,Y,A2_ZERO,A1_RS1, IMM_X, DW_XPR,FN_ADD,   N,M_X,N,N,N,N,N,N,Y,CSR.N,N,N,N,N),
-    CUSTOM2_ALL->       List(Y,N,Y,N,N,N,Y,Y,A2_ZERO,A1_RS1, IMM_X, DW_XPR,FN_ADD,   N,M_X,N,N,N,N,N,N,Y,CSR.N,N,N,N,N),
-    CUSTOM3_ALL->       List(Y,N,Y,N,N,N,Y,Y,A2_ZERO,A1_RS1, IMM_X, DW_XPR,FN_ADD,   N,M_X,N,N,N,N,N,N,Y,CSR.N,N,N,N,N))
+    CUSTOM0_ALL->       List(Y,N,Y,N,N,N,Y,Y,A2_ZERO,A1_RS1, IMM_X, DW_XPR,FN_ADD,   N,M_X,        N,N,N,N,N,N,Y,CSR.N,N,N,N,N),
+    CUSTOM1_ALL->       List(Y,N,Y,N,N,N,Y,Y,A2_ZERO,A1_RS1, IMM_X, DW_XPR,FN_ADD,   N,M_X,        N,N,N,N,N,N,Y,CSR.N,N,N,N,N),
+    CUSTOM2_ALL->       List(Y,N,Y,N,N,N,Y,Y,A2_ZERO,A1_RS1, IMM_X, DW_XPR,FN_ADD,   N,M_X,        N,N,N,N,N,N,Y,CSR.N,N,N,N,N),
+    CUSTOM3_ALL->       List(Y,N,Y,N,N,N,Y,Y,A2_ZERO,A1_RS1, IMM_X, DW_XPR,FN_ADD,   N,M_X,        N,N,N,N,N,N,Y,CSR.N,N,N,N,N))
 
     // CUSTOM0->           List(Y,N,Y,N,N,N,Y,Y,A2_ZERO,A1_RS1, IMM_X, DW_XPR,FN_ADD,   N,M_X,N,N,N,N,N,N,Y,CSR.N,N,N,N,N),
     // CUSTOM0_RS1->       List(Y,N,Y,N,N,N,Y,Y,A2_ZERO,A1_RS1, IMM_X, DW_XPR,FN_ADD,   N,M_X,N,N,N,N,N,N,Y,CSR.N,N,N,N,N),

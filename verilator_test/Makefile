@@ -12,7 +12,7 @@ VERILATOR_TOP=test
 VERILATOR_FLAGS=--cc --exe --trace --timing --top-module $(VERILATOR_TOP) \
 			--Wno-PINMISSING \
 			--Wno-UNOPTFLAT \
-			--Wno-WIDTHEXPAND \
+			--Wno-WIDTHEXPAND --Wno-WIDTHXZEXPAND\
 			--Wno-WIDTHTRUNC \
 			--Wno-UNSIGNED
 

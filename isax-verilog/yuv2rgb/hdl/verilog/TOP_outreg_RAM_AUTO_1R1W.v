@@ -37,6 +37,9 @@ input clk;
 
 (* ram_style = "auto"  *)reg [DataWidth-1:0] ram[0:AddressRange-1];
 
+initial begin
+    $readmemh("./TOP_outreg_RAM_AUTO_1R1W_1.dat", ram);
+end 
 
  
 
