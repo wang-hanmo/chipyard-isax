@@ -2,32 +2,109 @@
 ROCKET=RocketISAXConfig
 BOOM=ISAXMediumBoomV3Config
 
-bench=yuv2rgb
+make run-binary CONFIG=$ROCKET  MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop-rocc_BASELINE_O0.riscv   &
+make run-binary CONFIG=$ROCKET  MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop-rocc_BASELINE_O2.riscv   &
+make run-binary CONFIG=$ROCKET  MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop-rocc_BASELINE_O0.riscv    &
+make run-binary CONFIG=$ROCKET  MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop-rocc_BASELINE_O2.riscv    &
+make run-binary CONFIG=$ROCKET  MODULE=aes      BINARY=../../isax-benchmark/aes/mainop-rocc_BASELINE_O0.riscv       &
+make run-binary CONFIG=$ROCKET  MODULE=aes      BINARY=../../isax-benchmark/aes/mainop-rocc_BASELINE_O2.riscv       &
+make run-binary CONFIG=$ROCKET  MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop-rocc_BASELINE_O0.riscv      &
+make run-binary CONFIG=$ROCKET  MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop-rocc_BASELINE_O2.riscv      &
+make run-binary CONFIG=$ROCKET  MODULE=gage     BINARY=../../isax-benchmark/gage/mainop-rocc_BASELINE_O0.riscv      &
+make run-binary CONFIG=$ROCKET  MODULE=gage     BINARY=../../isax-benchmark/gage/mainop-rocc_BASELINE_O2.riscv      &
+wait
 
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_BASELINE_O0.riscv       &
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_BASELINE_O2.riscv       &
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_BASELINE_O2U4.riscv     &
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O0_NN.riscv             &
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2_NN.riscv             &
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2_NY.riscv             &
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2_YN.riscv             &
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2_YY.riscv             &
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2U4_NN.riscv           &
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2U4_NY.riscv           &
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2U4_YN.riscv           &
-make run-binary CONFIG=$ROCKET  MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2U4_YY.riscv          
+make run-binary CONFIG=$ROCKET  MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop-rocc_BASELINE_O2U4.riscv &
+make run-binary CONFIG=$ROCKET  MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop-rocc_BASELINE_O3.riscv   &
+make run-binary CONFIG=$ROCKET  MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop-rocc_BASELINE_O2U4.riscv  &
+make run-binary CONFIG=$ROCKET  MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop-rocc_BASELINE_O3.riscv    &
+make run-binary CONFIG=$ROCKET  MODULE=aes      BINARY=../../isax-benchmark/aes/mainop-rocc_BASELINE_O2U4.riscv     &
+make run-binary CONFIG=$ROCKET  MODULE=aes      BINARY=../../isax-benchmark/aes/mainop-rocc_BASELINE_O3.riscv       &
+make run-binary CONFIG=$ROCKET  MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop-rocc_BASELINE_O2U4.riscv    &
+make run-binary CONFIG=$ROCKET  MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop-rocc_BASELINE_O3.riscv      &
+make run-binary CONFIG=$ROCKET  MODULE=gage     BINARY=../../isax-benchmark/gage/mainop-rocc_BASELINE_O2U4.riscv    &
+make run-binary CONFIG=$ROCKET  MODULE=gage     BINARY=../../isax-benchmark/gage/mainop-rocc_BASELINE_O3.riscv      &
+wait
 
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_BASELINE_O0.riscv       &
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_BASELINE_O2.riscv       &
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_BASELINE_O2U4.riscv     &
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O0_NN.riscv             &
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2_NN.riscv             &
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2_NY.riscv             &
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2_YN.riscv             &
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2_YY.riscv             &
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2U4_NN.riscv           &
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2U4_NY.riscv           &
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2U4_YN.riscv           &
-make run-binary CONFIG=$BOOM    MODULE=$bench BINARY=../../isax-benchmark/$bench/mainop_O2U4_YY.riscv          
+make run-binary CONFIG=$BOOM    MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop-rocc_BASELINE_O0.riscv   &
+make run-binary CONFIG=$BOOM    MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop-rocc_BASELINE_O2.riscv   &
+make run-binary CONFIG=$BOOM    MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop-rocc_BASELINE_O0.riscv    &
+make run-binary CONFIG=$BOOM    MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop-rocc_BASELINE_O2.riscv    &
+make run-binary CONFIG=$BOOM    MODULE=aes      BINARY=../../isax-benchmark/aes/mainop-rocc_BASELINE_O0.riscv       &
+make run-binary CONFIG=$BOOM    MODULE=aes      BINARY=../../isax-benchmark/aes/mainop-rocc_BASELINE_O2.riscv       &
+make run-binary CONFIG=$BOOM    MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop-rocc_BASELINE_O0.riscv      &
+make run-binary CONFIG=$BOOM    MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop-rocc_BASELINE_O2.riscv      &
+make run-binary CONFIG=$BOOM    MODULE=gage     BINARY=../../isax-benchmark/gage/mainop-rocc_BASELINE_O0.riscv      &
+make run-binary CONFIG=$BOOM    MODULE=gage     BINARY=../../isax-benchmark/gage/mainop-rocc_BASELINE_O2.riscv      &
+wait
 
+make run-binary CONFIG=$BOOM    MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop-rocc_BASELINE_O2U4.riscv &
+make run-binary CONFIG=$BOOM    MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop-rocc_BASELINE_O3.riscv   &
+make run-binary CONFIG=$BOOM    MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop-rocc_BASELINE_O2U4.riscv  &
+make run-binary CONFIG=$BOOM    MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop-rocc_BASELINE_O3.riscv    &
+make run-binary CONFIG=$BOOM    MODULE=aes      BINARY=../../isax-benchmark/aes/mainop-rocc_BASELINE_O2U4.riscv     &
+make run-binary CONFIG=$BOOM    MODULE=aes      BINARY=../../isax-benchmark/aes/mainop-rocc_BASELINE_O3.riscv       &
+make run-binary CONFIG=$BOOM    MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop-rocc_BASELINE_O2U4.riscv    &
+make run-binary CONFIG=$BOOM    MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop-rocc_BASELINE_O3.riscv      &
+make run-binary CONFIG=$BOOM    MODULE=gage     BINARY=../../isax-benchmark/gage/mainop-rocc_BASELINE_O2U4.riscv    &
+make run-binary CONFIG=$BOOM    MODULE=gage     BINARY=../../isax-benchmark/gage/mainop-rocc_BASELINE_O3.riscv      &
+wait
+
+make run-binary CONFIG=$ROCKET  MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop_O3_NN.riscv              &
+make run-binary CONFIG=$ROCKET  MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop_O3_NY.riscv              &
+make run-binary CONFIG=$ROCKET  MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop_O3_YN.riscv              &
+make run-binary CONFIG=$ROCKET  MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop_O3_YY.riscv              &
+make run-binary CONFIG=$ROCKET  MODULE=aes      BINARY=../../isax-benchmark/aes/mainop_O3_NN.riscv                  &
+make run-binary CONFIG=$ROCKET  MODULE=aes      BINARY=../../isax-benchmark/aes/mainop_O3_NY.riscv                  &
+make run-binary CONFIG=$ROCKET  MODULE=aes      BINARY=../../isax-benchmark/aes/mainop_O3_YN.riscv                  &
+make run-binary CONFIG=$ROCKET  MODULE=aes      BINARY=../../isax-benchmark/aes/mainop_O3_YY.riscv                  &
+make run-binary CONFIG=$ROCKET  MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop_O3_NN.riscv               &
+make run-binary CONFIG=$ROCKET  MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop_O3_NY.riscv               &
+wait
+
+make run-binary CONFIG=$ROCKET  MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop_O3_YN.riscv               &
+make run-binary CONFIG=$ROCKET  MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop_O3_YY.riscv               &
+make run-binary CONFIG=$ROCKET  MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop_O3_NN.riscv                 &
+make run-binary CONFIG=$ROCKET  MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop_O3_NY.riscv                 &
+make run-binary CONFIG=$ROCKET  MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop_O3_YN.riscv                 &
+make run-binary CONFIG=$ROCKET  MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop_O3_YY.riscv                 &
+make run-binary CONFIG=$ROCKET  MODULE=gage     BINARY=../../isax-benchmark/gage/mainop_O3_NN.riscv                 &
+make run-binary CONFIG=$ROCKET  MODULE=gage     BINARY=../../isax-benchmark/gage/mainop_O3_NY.riscv                 &
+make run-binary CONFIG=$ROCKET  MODULE=gage     BINARY=../../isax-benchmark/gage/mainop_O3_YN.riscv                 &
+make run-binary CONFIG=$ROCKET  MODULE=gage     BINARY=../../isax-benchmark/gage/mainop_O3_YY.riscv                 &
+
+make run-binary CONFIG=$BOOM    MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop_O3_NN.riscv              &
+make run-binary CONFIG=$BOOM    MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop_O3_NY.riscv              &
+make run-binary CONFIG=$BOOM    MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop_O3_YN.riscv              &
+make run-binary CONFIG=$BOOM    MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop_O3_YY.riscv              &
+make run-binary CONFIG=$BOOM    MODULE=aes      BINARY=../../isax-benchmark/aes/mainop_O3_NN.riscv                  &
+make run-binary CONFIG=$BOOM    MODULE=aes      BINARY=../../isax-benchmark/aes/mainop_O3_NY.riscv                  &
+make run-binary CONFIG=$BOOM    MODULE=aes      BINARY=../../isax-benchmark/aes/mainop_O3_YN.riscv                  &
+make run-binary CONFIG=$BOOM    MODULE=aes      BINARY=../../isax-benchmark/aes/mainop_O3_YY.riscv                  &
+make run-binary CONFIG=$BOOM    MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop_O3_NN.riscv               &
+make run-binary CONFIG=$BOOM    MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop_O3_NY.riscv               &
+wait
+
+make run-binary CONFIG=$BOOM    MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop_O3_YN.riscv               &
+make run-binary CONFIG=$BOOM    MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop_O3_YY.riscv               &
+make run-binary CONFIG=$BOOM    MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop_O3_NN.riscv                 &
+make run-binary CONFIG=$BOOM    MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop_O3_NY.riscv                 &
+make run-binary CONFIG=$BOOM    MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop_O3_YN.riscv                 &
+make run-binary CONFIG=$BOOM    MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop_O3_YY.riscv                 &
+make run-binary CONFIG=$BOOM    MODULE=gage     BINARY=../../isax-benchmark/gage/mainop_O3_NN.riscv                 &
+make run-binary CONFIG=$BOOM    MODULE=gage     BINARY=../../isax-benchmark/gage/mainop_O3_NY.riscv                 &
+make run-binary CONFIG=$BOOM    MODULE=gage     BINARY=../../isax-benchmark/gage/mainop_O3_YN.riscv                 &
+make run-binary CONFIG=$BOOM    MODULE=gage     BINARY=../../isax-benchmark/gage/mainop_O3_YY.riscv                 &
+wait
+
+make run-binary CONFIG=$ROCKET  MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop_BASELINE_O3.riscv        &
+make run-binary CONFIG=$ROCKET  MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop_BASELINE_O3.riscv         &
+make run-binary CONFIG=$ROCKET  MODULE=aes      BINARY=../../isax-benchmark/aes/mainop_BASELINE_O3.riscv            &
+make run-binary CONFIG=$ROCKET  MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop_BASELINE_O3.riscv           &
+make run-binary CONFIG=$ROCKET  MODULE=gage     BINARY=../../isax-benchmark/gage/mainop_BASELINE_O3.riscv           &
+make run-binary CONFIG=$BOOM    MODULE=yuv2rgb  BINARY=../../isax-benchmark/yuv2rgb/mainop_BASELINE_O3.riscv        &
+make run-binary CONFIG=$BOOM    MODULE=conv1d   BINARY=../../isax-benchmark/conv1d/mainop_BASELINE_O3.riscv         &
+make run-binary CONFIG=$BOOM    MODULE=aes      BINARY=../../isax-benchmark/aes/mainop_BASELINE_O3.riscv            &
+make run-binary CONFIG=$BOOM    MODULE=gemv     BINARY=../../isax-benchmark/gemv/mainop_BASELINE_O3.riscv           &
+make run-binary CONFIG=$BOOM    MODULE=gage     BINARY=../../isax-benchmark/gage/mainop_BASELINE_O3.riscv           &
 wait
