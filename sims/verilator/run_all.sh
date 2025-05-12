@@ -11,8 +11,8 @@ CASES=(mainop_BASELINE_O0 mainop_BASELINE_O2 mainop_BASELINE_O2U4 mainop_O0_NN m
 ROCKET=RocketISAXConfig
 BOOM=ISAXMediumBoomV3Config
 
-module=gemv-simd
-bench=gemv-simd
+module=gage_new
+bench=gage_new
 
 make run-binary CONFIG=$ROCKET  MODULE=$module  BINARY=../../isax-benchmark/$bench/mainop_BASELINE_O0.riscv         &
 make run-binary CONFIG=$ROCKET  MODULE=$module  BINARY=../../isax-benchmark/$bench/mainop_BASELINE_O2.riscv         &

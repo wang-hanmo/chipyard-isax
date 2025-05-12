@@ -3,5 +3,5 @@
 
     at SimTSI.scala:21 assert(!error, "*** FAILED *** (exit code = %%d)\n", exit >> 1.U)
 
-%Error: /mnt/disk/newhome_20241022/wanghanmo/chipyard-isax/sims/verilator/generated-src/chipyard.harness.TestHarness.ISAXMediumBoomV3Config.conv1d_new/gen-collateral/TestHarness.sv:99: Verilog $stop
+%Error: /mnt/disk/newhome_20241022/wanghanmo/chipyard-isax/sims/verilator/generated-src/chipyard.harness.TestHarness.ISAXMediumBoomV3Config.conv1d/gen-collateral/TestHarness.sv:99: Verilog $stop
 Aborting...

@@ -1,5 +1,5 @@
 [UART] UART0 is here (stdin/stdout).
-[8019295000] %Error: TestHarness.sv:99: Assertion failed in TOP.TestDriver.testHarness: Assertion failed: *** FAILED *** (exit code =     877715)
+[7496735000] %Error: TestHarness.sv:99: Assertion failed in TOP.TestDriver.testHarness: Assertion failed: *** FAILED *** (exit code =     607929)
 
     at SimTSI.scala:21 assert(!error, "*** FAILED *** (exit code = %%d)\n", exit >> 1.U)
 

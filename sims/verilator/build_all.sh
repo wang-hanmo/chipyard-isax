@@ -12,8 +12,8 @@ BOOM=ISAXMediumBoomV3Config
 # make CONFIG=$ROCKET MODULE=gage    &
 # make CONFIG=$ROCKET MODULE=yuv2rgb 
 
-make CONFIG=$BOOM   MODULE=gemv-simd    &
-make CONFIG=$ROCKET MODULE=gemv-simd    
+make CONFIG=$BOOM   MODULE=gage_new    &
+make CONFIG=$ROCKET MODULE=gage_new    
 
 # make CONFIG=$BOOM   MODULE=gage  &
 # make CONFIG=$ROCKET MODULE=gage  
