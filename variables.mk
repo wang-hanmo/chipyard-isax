@@ -142,6 +142,7 @@ CHIPYARD_RSRCS_DIR   = $(base_dir)/generators/chipyard/src/main/resources
 #########################################################################################
 # names of various files needed to compile and run things
 #########################################################################################
+# long_name = $(MODEL_PACKAGE).$(MODEL).$(CONFIG)
 long_name = $(MODEL_PACKAGE).$(MODEL).$(CONFIG).$(MODULE)
 
 # classpaths

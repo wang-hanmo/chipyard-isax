@@ -1,5 +1,15 @@
 # Chipyard-ISAX 说明
 
+### 2025.08.09更新
+
+1. HLS生成的Verilog放在isax-verilog目录下，最近一次测试的应该是后缀`_1`的一组。`fresh.sh`是上次增加SCAIE-V之后统一测试的临时搬运脚本，不用管。这部分维护的流程就是把新的export.zip放到目录中解压，再用vscode等工具批量删除`#0`时延符号。
+
+2. 测试程序放在isax-benchmark目录下，最近一次测试的应该是后缀`_1`的一组。后缀`_85f3a5`的一组应该是对应isax-benchmark仓库某个commit号的，但我没找到是哪一个。这部分的维护流程是把.o文件放到各个benchmark目录中，在`compile_all.sh`中设置要链接的`BENCHMARKS`和`CASES`，然后批量运行。
+
+3. 模拟测试目录为`sims/verilator`，使用`make run-binary`即可运行测试，可以参考`run_all6.sh`和`run_all7.sh`，批量并发运行可以参考`run_allbench.sh`。命令须配置好`CONFIG`（RocketISAXConfig/ISAXMediumBoomV3Config）、`MODULE`（HLS模块名，如aes_1）、`BINARY`（ELF路径，如../../isax-benchmark/aes_1/mainop_O0_NN.riscv）。如果HLS模块保持不变，可以先用`make`编译模拟器，参考`build_all.sh`，然后再反复运行测试程序。
+
+4. 测试结果在`output`目录下，可以用`extract.py`提取数据。
+
 ### 目录和文件
 
 ```

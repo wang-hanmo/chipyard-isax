@@ -4,3 +4,5 @@
 !verilator.mk
 !dramsim2_ini
 !*.sh
+!*.py
+

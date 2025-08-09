@@ -77,6 +77,7 @@ HELP_SIMULATION_VARIABLES += \
 #########################################################################################
 # verilator/cxx binary and flags
 #########################################################################################
+# VERILATOR := verilator --main --timing --cc --exe
 VERILATOR := verilator --main --timing --cc --exe -I../../isax-verilog/$(MODULE)/hdl/verilog -I../../isax-verilog/$(MODULE)/hdl/ip
 
 #----------------------------------------------------------------------------------------
